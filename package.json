@@ -1,0 +1,28 @@
+{
+  "name": "response-time",
+  "description": "X-Response-Time header for node.js",
+  "version": "1.0.0",
+  "author": {
+    "name": "Jonathan Ong",
+    "email": "me@jongleberry.com",
+    "url": "http://jongleberry.com",
+    "twitter": "https://twitter.com/jongleberry"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/expressjs/response-time.git"
+  },
+  "bugs": {
+    "mail": "me@jongleberry.com",
+    "url": "https://github.com/expressjs/response-time/issues"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*",
+    "supertest": "*"
+  },
+  "scripts": {
+    "test": "make test"
+  }
+}
