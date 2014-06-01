@@ -8,9 +8,10 @@ Response time middleware extracted from connect.
 Usage:
 
 ```js
-var responseTime = require('response-time');
+var responseTime = require('response-time')
 
-app.use(responseTime());
+// time starts ticking from the moment req goes through the middleware
+app.use(responseTime())
 ```
 
 ## License
