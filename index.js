@@ -21,22 +21,19 @@ var onHeaders = require('on-headers')
  * @api public
  */
 
-module.exports = function responseTime(){
-  return function(req, res, next){
-    next = next || noop;
-    if (res._responseTime) return next();
-    res._responseTime = true;
-
+module.exports = function responseTime () {
+  return function responseTime(req, res, next) {
     var startAt = process.hrtime()
 
     onHeaders(res, function () {
+      if (this.getHeader('X-Response-Time')) return;
+
       var diff = process.hrtime(startAt)
       var ms = diff[0] * 1e3 + diff[1] * 1e-6
+
       this.setHeader('X-Response-Time', ms.toFixed(3) + 'ms')
     })
 
-    next();
-  };
-};
-
-function noop() {}
+    next()
+  }
+}
