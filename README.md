@@ -5,14 +5,26 @@
 
 Response time middleware extracted from connect.
 
-Usage:
+## Installation
+
+```sh
+$ npm install response-time
+```
+
+## API
 
 ```js
 var responseTime = require('response-time')
 
 // time starts ticking from the moment req goes through the middleware
-app.use(responseTime())
+app.use(responseTime(5))
 ```
+
+### bodyParser(digits)
+
+Returns middleware that adds a `X-Response-Time` header to responses.
+
+- `digits` - the fixed number of digits to include. (default: `3`)
 
 ## License
 
