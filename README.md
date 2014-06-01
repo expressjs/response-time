@@ -1,5 +1,8 @@
 # Response Time
 
+[![NPM version](https://badge.fury.io/js/response-time.svg)](https://badge.fury.io/js/response-time)
+[![Build Status](https://travis-ci.org/expressjs/response-time.svg?branch=master)](https://travis-ci.org/expressjs/response-time)
+
 Response time middleware extracted from connect.
 
 Usage:
