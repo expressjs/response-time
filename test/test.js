@@ -1,22 +1,27 @@
 var http = require('http');
 var request = require('supertest');
+var responseTime = require('..')
 
-var responseTime = require('..')();
-
-describe('Response Time', function () {
-  it('should set the response time header', function (done) {
-    var server = http.createServer(function (req, res) {
-      responseTime(req, res);
-      setTimeout(function () {
-        res.statusCode = 204;
-        res.end();
-      }, 10)
-    })
-
+describe('responseTime()', function () {
+  it('should send X-Response-Time header', function (done) {
+    var server = createServer()
     request(server)
     .get('/')
-    .expect(204)
-    .expect('X-Response-Time', /1[0-9]ms/)
-    .end(done);
+    .expect('X-Response-Time', /^[0-9\.]+ms$/, done)
   })
 })
+
+function createServer(ms) {
+  var _responseTime = responseTime()
+
+  ms = ms || 10
+
+  return http.createServer(function (req, res) {
+    _responseTime(req, res, function (err) {
+      setTimeout(function () {
+        res.statusCode = err ? (err.status || 500) : 200
+        res.end(err ? err.message : 'OK')
+      }, ms)
+    })
+  })
+}

@@ -31,4 +31,4 @@ module.exports = function responseTime(){
   };
 };
 
-function noop() {};
+function noop() {}
