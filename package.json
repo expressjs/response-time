@@ -17,6 +17,9 @@
     "mail": "me@jongleberry.com",
     "url": "https://github.com/expressjs/response-time/issues"
   },
+  "dependencies": {
+    "on-headers": "0.0.0"
+  },
   "devDependencies": {
     "mocha": "~1.20.0",
     "supertest": "~0.13.0"

@@ -6,6 +6,12 @@
  */
 
 /**
+ * Module dependencies
+ */
+
+var onHeaders = require('on-headers')
+
+/**
  * Reponse time:
  *
  * Adds the `X-Response-Time` header displaying the response
@@ -19,14 +25,14 @@ module.exports = function responseTime(){
   return function(req, res, next){
     next = next || noop;
     if (res._responseTime) return next();
-    var writeHead = res.writeHead;
     var start = Date.now();
     res._responseTime = true;
-    res.writeHead = function(){
-      var duration = Date.now() - start;
-      res.setHeader('X-Response-Time', duration + 'ms');
-      writeHead.apply(res, arguments);
-    };
+
+    onHeaders(res, function () {
+      var duration = Date.now() - start
+      this.setHeader('X-Response-Time', duration + 'ms')
+    })
+
     next();
   };
 };
