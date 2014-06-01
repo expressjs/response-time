@@ -20,7 +20,7 @@ var responseTime = require('response-time')
 app.use(responseTime(5))
 ```
 
-### bodyParser(digits)
+### responseTime(digits)
 
 Returns middleware that adds a `X-Response-Time` header to responses.
 
