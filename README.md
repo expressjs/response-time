@@ -1,4 +1,4 @@
-# Response Time
+# response-time
 
 [![NPM version](https://badge.fury.io/js/response-time.svg)](https://badge.fury.io/js/response-time)
 [![Build Status](https://travis-ci.org/expressjs/response-time.svg?branch=master)](https://travis-ci.org/expressjs/response-time)
