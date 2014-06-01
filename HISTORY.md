@@ -1,5 +1,5 @@
-unreleased
-==========
+2.0.0 / 2014-05-31
+==================
 
   * add `digits` argument
   * do not override existing `X-Response-Time` header
