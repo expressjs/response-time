@@ -22,7 +22,7 @@ var onHeaders = require('on-headers')
  * @api public
  */
 
-module.exports = function responseTime(digits) {
+module.exports = function responseTime(digits, callback) {
   digits = digits === undefined
     ? 3
     : digits
@@ -37,6 +37,9 @@ module.exports = function responseTime(digits) {
       var ms = diff[0] * 1e3 + diff[1] * 1e-6
 
       this.setHeader('X-Response-Time', ms.toFixed(digits) + 'ms')
+
+      if(typeof callback === 'function') callback.call(this, req, res)
+
     })
 
     next()
