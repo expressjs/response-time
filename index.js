@@ -1,7 +1,8 @@
-
 /*!
- * Connect - responseTime
+ * response-time
  * Copyright(c) 2011 TJ Holowaychuk
+ * Copyright(c) 2014 Jonathan Ong
+ * Copyright(c) 2014 Douglas Christopher Wilson
  * MIT Licensed
  */
 
