@@ -18,9 +18,6 @@ $ npm install response-time
 
 ```js
 var responseTime = require('response-time')
-
-// time starts ticking from the moment req goes through the middleware
-app.use(responseTime(5))
 ```
 
 ### responseTime(digits)
@@ -28,6 +25,45 @@ app.use(responseTime(5))
 Returns middleware that adds a `X-Response-Time` header to responses.
 
 - `digits` - the fixed number of digits to include. (default: `3`)
+
+## Examples
+
+### express/connect
+
+```js
+var express = require('express')
+var responseTime = require('response-time')
+
+var app = express()
+
+app.use(responseTime())
+
+app.get('/', function (req, res) {
+  res.send('hello, world!')
+})
+```
+
+### vanilla http server
+
+```js
+var finalhandler = require('finalhandler')
+var http = require('http')
+var responseTime = require('response-time')
+
+// create "middleware"
+var _responseTime = responseTime()
+
+http.createServer(function (req, res) {
+  var done = finalhandler(req, res)
+  _responseTime(req, res, function (err) {
+    if (err) return done(err)
+
+    // respond to request
+    res.setHeader('content-type', 'text/plain')
+    res.end('hello, world!')
+  })
+})
+```
 
 ## License
 
