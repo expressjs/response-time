@@ -4,6 +4,7 @@
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Build Status][travis-image]][travis-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
+[![Gratipay][gratipay-image]][gratipay-url]
 
 Response time middleware extracted from connect.
 
@@ -40,3 +41,5 @@ Returns middleware that adds a `X-Response-Time` header to responses.
 [coveralls-url]: https://coveralls.io/r/expressjs/response-time?branch=master
 [downloads-image]: http://img.shields.io/npm/dm/response-time.svg?style=flat
 [downloads-url]: https://npmjs.org/package/response-time
+[gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg?style=flat
+[gratipay-url]: https://www.gratipay.com/dougwilson/
