@@ -6,7 +6,7 @@
 [![Test Coverage][coveralls-image]][coveralls-url]
 [![Gratipay][gratipay-image]][gratipay-url]
 
-Response time middleware extracted from connect.
+X-Response-Time header for node.js
 
 ## Installation
 
