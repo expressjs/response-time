@@ -1,3 +1,6 @@
+
+process.env.NO_DEPRECATION = 'response-time'
+
 var http = require('http');
 var request = require('supertest');
 var responseTime = require('..')
@@ -28,6 +31,13 @@ describe('responseTime()', function () {
       .expect('X-Response-Time', /^[0-9]+\.[0-9]{3}ms$/, done)
     })
 
+    it('should allow custom digits', function (done) {
+      var server = createServer(5)
+      request(server)
+      .get('/')
+      .expect('X-Response-Time', /^[0-9]+\.[0-9]{5}ms$/, done)
+    })
+
     it('should allow no digits', function (done) {
       var server = createServer(0)
       request(server)
@@ -37,8 +47,33 @@ describe('responseTime()', function () {
   })
 })
 
-function createServer(digits, fn) {
-  var _responseTime = responseTime(digits)
+describe('responseTime(options)', function () {
+  describe('with "digits" option', function () {
+    it('should default to 3', function (done) {
+      var server = createServer()
+      request(server)
+      .get('/')
+      .expect('X-Response-Time', /^[0-9]+\.[0-9]{3}ms$/, done)
+    })
+
+    it('should allow custom digits', function (done) {
+      var server = createServer({ digits: 5 })
+      request(server)
+      .get('/')
+      .expect('X-Response-Time', /^[0-9]+\.[0-9]{5}ms$/, done)
+    })
+
+    it('should allow no digits', function (done) {
+      var server = createServer({ digits: 0 })
+      request(server)
+      .get('/')
+      .expect('X-Response-Time', /^[0-9]+ms$/, done)
+    })
+  })
+})
+
+function createServer(opts, fn) {
+  var _responseTime = responseTime(opts)
   return http.createServer(function (req, res) {
     _responseTime(req, res, function (err) {
       setTimeout(function () {

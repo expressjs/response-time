@@ -10,6 +10,7 @@
  * Module dependencies
  */
 
+var deprecate = require('depd')('response-time')
 var onHeaders = require('on-headers')
 
 /**
@@ -18,15 +19,25 @@ var onHeaders = require('on-headers')
  * Adds the `X-Response-Time` header displaying the response
  * duration in milliseconds.
  *
- * @param {number} [digits=3]
+ * @param {object} [options]
+ * @param {number} [options.digits=3]
  * @return {function}
  * @api public
  */
 
-module.exports = function responseTime(digits) {
-  digits = digits === undefined
-    ? 3
-    : digits
+module.exports = function responseTime(options) {
+  if (typeof options === 'number') {
+    // back-compat single number argument
+    deprecate('number argument: use {digits: ' + JSON.stringify(options) + '} instead')
+    options = { digits: options }
+  }
+
+  options = options || {}
+
+  // response time digits
+  var digits = options.digits !== undefined
+    ? options.digits
+    : 3
 
   return function responseTime(req, res, next) {
     var startAt = process.hrtime()

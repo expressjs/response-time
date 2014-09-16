@@ -9,6 +9,7 @@
   "license": "MIT",
   "repository": "expressjs/response-time",
   "dependencies": {
+    "depd": "0.4.5",
     "on-headers": "~1.0.0"
   },
   "devDependencies": {

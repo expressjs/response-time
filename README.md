@@ -20,11 +20,18 @@ $ npm install response-time
 var responseTime = require('response-time')
 ```
 
-### responseTime(digits)
+### responseTime(options)
 
 Returns middleware that adds a `X-Response-Time` header to responses.
 
-- `digits` - the fixed number of digits to include. (default: `3`)
+#### Options
+
+`responseTime` accepts these properties in the options object.
+
+##### digits
+
+The fixed number of digits to include in the output, which is always in
+milliseconds, defaults to `3` (ex: `2.300ms`).
 
 ## Examples
 
