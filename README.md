@@ -75,7 +75,7 @@ http.createServer(function (req, res) {
 [travis-url]: https://travis-ci.org/expressjs/response-time
 [coveralls-image]: https://img.shields.io/coveralls/expressjs/response-time.svg?style=flat
 [coveralls-url]: https://coveralls.io/r/expressjs/response-time?branch=master
-[downloads-image]: http://img.shields.io/npm/dm/response-time.svg?style=flat
+[downloads-image]: https://img.shields.io/npm/dm/response-time.svg?style=flat
 [downloads-url]: https://npmjs.org/package/response-time
 [gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg?style=flat
 [gratipay-url]: https://www.gratipay.com/dougwilson/
