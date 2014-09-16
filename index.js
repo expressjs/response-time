@@ -32,8 +32,6 @@ module.exports = function responseTime(digits, header) {
     ? header
     : 'X-Response-Time'
 
-    console.log(header);
-
   return function responseTime(req, res, next) {
     var startAt = process.hrtime()
 
