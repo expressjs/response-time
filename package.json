@@ -1,12 +1,18 @@
 {
   "name": "response-time",
-  "description": "X-Response-Time header for node.js",
+  "description": "Response time header for node.js",
   "version": "2.0.1",
   "author": "Jonathan Ong <me@jongleberry.com> (http://jongleberry.com)",
   "contributors": [
     "Douglas Christopher Wilson <doug@somethingdoug.com>"
   ],
   "license": "MIT",
+  "keywords": [
+    "http",
+    "res",
+    "response time",
+    "x-response-time"
+  ],
   "repository": "expressjs/response-time",
   "dependencies": {
     "depd": "0.4.5",

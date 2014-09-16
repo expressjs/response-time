@@ -70,6 +70,22 @@ describe('responseTime(options)', function () {
       .expect('X-Response-Time', /^[0-9]+ms$/, done)
     })
   })
+
+  describe('with "header" option', function () {
+    it('should default to X-Response-Time', function (done) {
+      var server = createServer()
+      request(server)
+      .get('/')
+      .expect('X-Response-Time', /^[0-9\.]+ms$/, done)
+    })
+
+    it('should allow custom header name', function (done) {
+      var server = createServer({ header: 'X-Time-Taken' })
+      request(server)
+      .get('/')
+      .expect('X-Time-Taken', /^[0-9\.]+ms$/, done)
+    })
+  })
 })
 
 function createServer(opts, fn) {

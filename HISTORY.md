@@ -1,6 +1,7 @@
 unreleased
 ==========
 
+  * Add `header` option for custom header name
   * Change `digits` argument to an `options` argument
 
 2.0.1 / 2014-08-10

@@ -39,16 +39,21 @@ module.exports = function responseTime(options) {
     ? options.digits
     : 3
 
+  // header name
+  var header = options.header || 'X-Response-Time'
+
   return function responseTime(req, res, next) {
     var startAt = process.hrtime()
 
     onHeaders(res, function () {
-      if (this.getHeader('X-Response-Time')) return;
+      if (this.getHeader(header)) {
+        return
+      }
 
       var diff = process.hrtime(startAt)
       var ms = diff[0] * 1e3 + diff[1] * 1e-6
 
-      this.setHeader('X-Response-Time', ms.toFixed(digits) + 'ms')
+      this.setHeader(header, ms.toFixed(digits) + 'ms')
     })
 
     next()

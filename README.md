@@ -6,7 +6,7 @@
 [![Test Coverage][coveralls-image]][coveralls-url]
 [![Gratipay][gratipay-image]][gratipay-url]
 
-X-Response-Time header for node.js
+Response time header for node.js
 
 ## Installation
 
@@ -32,6 +32,10 @@ Returns middleware that adds a `X-Response-Time` header to responses.
 
 The fixed number of digits to include in the output, which is always in
 milliseconds, defaults to `3` (ex: `2.300ms`).
+
+##### header
+
+The name of the header to set, defaults to `X-Response-Time`.
 
 ## Examples
 
