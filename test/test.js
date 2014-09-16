@@ -11,8 +11,8 @@ describe('responseTime()', function () {
   })
 
   it('should send custom response time header', function (done) {
-    var customHeader = 'X-Backend-Response-Time',
-      server = createServer(undefined, customHeader)
+    var customHeader = 'X-Backend-Response-Time'
+    var server = createServer(undefined, customHeader)
     request(server)
     .get('/')
     .expect(customHeader, /^[0-9\.]+ms$/, done)  
