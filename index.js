@@ -38,8 +38,8 @@ module.exports = function responseTime(digits, header) {
     onHeaders(res, function () {
       if (this.getHeader(header)) return;
 
-      var diff = process.hrtime(startAt),
-        ms = diff[0] * 1e3 + diff[1] * 1e-6
+      var diff = process.hrtime(startAt)
+      var ms = diff[0] * 1e3 + diff[1] * 1e-6
 
       this.setHeader(header, ms.toFixed(digits) + 'ms')
     })
