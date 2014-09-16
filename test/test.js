@@ -10,8 +10,16 @@ describe('responseTime()', function () {
     .expect('X-Response-Time', /^[0-9\.]+ms$/, done)
   })
 
+  it('should send custom response time header', function (done) {
+    var customHeader = 'X-Backend-Response-Time',
+      server = createServer(undefined, customHeader)
+    request(server)
+    .get('/')
+    .expect(customHeader, /^[0-9\.]+ms$/, done)  
+  })
+
   it('should not override X-Response-Time header', function (done) {
-    var server = createServer(undefined, function(req, res) {
+    var server = createServer(undefined, undefined, function(req, res) {
       res.setHeader('X-Response-Time', 'bogus')
     })
 
@@ -37,8 +45,8 @@ describe('responseTime()', function () {
   })
 })
 
-function createServer(digits, fn) {
-  var _responseTime = responseTime(digits)
+function createServer(digits, header, fn) {
+  var _responseTime = responseTime(digits, header)
   return http.createServer(function (req, res) {
     _responseTime(req, res, function (err) {
       setTimeout(function () {
