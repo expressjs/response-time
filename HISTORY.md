@@ -2,6 +2,7 @@ unreleased
 ==========
 
   * Add `suffix` option
+  * deps: depd@~1.0.0
 
 2.1.0 / 2014-09-16
 ==================
