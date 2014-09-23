@@ -37,6 +37,11 @@ milliseconds, defaults to `3` (ex: `2.300ms`).
 
 The name of the header to set, defaults to `X-Response-Time`.
 
+##### suffix
+
+Boolean to indicate if units of measurement suffix should be added to
+the output, defaults to `true` (ex: `2.300ms` vs `2.300`).
+
 ## Examples
 
 ### express/connect

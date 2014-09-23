@@ -86,6 +86,22 @@ describe('responseTime(options)', function () {
       .expect('X-Time-Taken', /^[0-9\.]+ms$/, done)
     })
   })
+
+  describe('with "suffix" option', function () {
+    it('should default to true', function (done) {
+      var server = createServer()
+      request(server)
+      .get('/')
+      .expect('X-Response-Time', /^[0-9\.]+ms$/, done)
+    })
+
+    it('should allow disabling suffix', function (done) {
+      var server = createServer({ suffix: false })
+      request(server)
+      .get('/')
+      .expect('X-Response-Time', /^[0-9\.]+$/, done)
+    })
+  })
 })
 
 function createServer(opts, fn) {

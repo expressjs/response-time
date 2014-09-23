@@ -42,6 +42,11 @@ module.exports = function responseTime(options) {
   // header name
   var header = options.header || 'X-Response-Time'
 
+  // display suffix
+  var suffix = options.suffix !== undefined
+    ? Boolean(options.suffix)
+    : true
+
   return function responseTime(req, res, next) {
     var startAt = process.hrtime()
 
@@ -52,8 +57,13 @@ module.exports = function responseTime(options) {
 
       var diff = process.hrtime(startAt)
       var ms = diff[0] * 1e3 + diff[1] * 1e-6
+      var val = ms.toFixed(digits)
 
-      this.setHeader(header, ms.toFixed(digits) + 'ms')
+      if (suffix) {
+        val += 'ms'
+      }
+
+      this.setHeader(header, val)
     })
 
     next()
