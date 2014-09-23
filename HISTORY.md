@@ -1,5 +1,5 @@
-unreleased
-==========
+2.2.0 / 2014-09-22
+==================
 
   * Add `suffix` option
   * deps: depd@~1.0.0
