@@ -1,3 +1,8 @@
+unreleased
+==========
+
+  * Add function argument to support recording of response time
+
 2.2.0 / 2014-09-22
 ==================
 

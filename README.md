@@ -25,13 +25,16 @@ $ npm install response-time
 var responseTime = require('response-time')
 ```
 
-### responseTime(options)
+### responseTime([options])
 
-Returns middleware that adds a `X-Response-Time` header to responses.
+Create a middleware that adds a `X-Response-Time` header to responses. If
+you don't want to use this module to automatically set a header, please
+see the section about [`responseTime(fn)`](#responsetimeoptions).
 
 #### Options
 
-`responseTime` accepts these properties in the options object.
+The `responseTime` function accepts an optional `options` object that may
+contain any of the following keys:
 
 ##### digits
 
@@ -46,6 +49,12 @@ The name of the header to set, defaults to `X-Response-Time`.
 
 Boolean to indicate if units of measurement suffix should be added to
 the output, defaults to `true` (ex: `2.300ms` vs `2.300`).
+
+### responseTime(fn)
+
+Create a new middleware that records the response time of a request and
+makes this available to your own function `fn`. The `fn` argument will be
+invoked as `fn(req, res, time)`, where `time` is a number in milliseconds.
 
 ## Examples
 
@@ -83,6 +92,32 @@ http.createServer(function (req, res) {
     res.setHeader('content-type', 'text/plain')
     res.end('hello, world!')
   })
+})
+```
+
+### response time metrics
+
+```js
+var express = require('express')
+var responseTime = require('response-time')
+var StatsD = requrie('node-statsd')
+
+var app = express()
+var stats = new StatsD()
+
+stats.socket.on('error', function (error) {
+  console.error(error.stack)
+})
+
+app.use(responseTime(function (req, res, time) {
+  var stat = (req.method + req.url).toLowerCase()
+    .replace(/[:\.]/g, '')
+    .replace(/\//g, '_')
+  stats.timing(stat, time)
+}))
+
+app.get('/', function (req, res) {
+  res.send('hello, world!')
 })
 ```
 

@@ -2,16 +2,23 @@
  * response-time
  * Copyright(c) 2011 TJ Holowaychuk
  * Copyright(c) 2014 Jonathan Ong
- * Copyright(c) 2014 Douglas Christopher Wilson
+ * Copyright(c) 2014-2015 Douglas Christopher Wilson
  * MIT Licensed
  */
 
 /**
  * Module dependencies
+ * @api private
  */
 
 var deprecate = require('depd')('response-time')
 var onHeaders = require('on-headers')
+
+/**
+ * Module exports
+ */
+
+module.exports = responseTime
 
 /**
  * Reponse time:
@@ -25,15 +32,40 @@ var onHeaders = require('on-headers')
  * @api public
  */
 
-module.exports = function responseTime(options) {
+function responseTime(options) {
+  var opts = options || {}
+
   if (typeof options === 'number') {
     // back-compat single number argument
     deprecate('number argument: use {digits: ' + JSON.stringify(options) + '} instead')
-    options = { digits: options }
+    opts = { digits: options }
   }
 
-  options = options || {}
+  // get the function to invoke
+  var fn = typeof opts !== 'function'
+    ? createSetHeader(opts)
+    : opts
 
+  return function responseTime(req, res, next) {
+    var startAt = process.hrtime()
+
+    onHeaders(res, function onHeaders() {
+      var diff = process.hrtime(startAt)
+      var time = diff[0] * 1e3 + diff[1] * 1e-6
+
+      fn(req, res, time)
+    })
+
+    next()
+  }
+}
+
+/**
+ * Create function to set respoonse time header.
+ * @api private
+ */
+
+function createSetHeader(options) {
   // response time digits
   var digits = options.digits !== undefined
     ? options.digits
@@ -47,25 +79,17 @@ module.exports = function responseTime(options) {
     ? Boolean(options.suffix)
     : true
 
-  return function responseTime(req, res, next) {
-    var startAt = process.hrtime()
+  return function setResponseHeader(req, res, time) {
+    if (res.getHeader(header)) {
+      return
+    }
 
-    onHeaders(res, function () {
-      if (this.getHeader(header)) {
-        return
-      }
+    var val = time.toFixed(digits)
 
-      var diff = process.hrtime(startAt)
-      var ms = diff[0] * 1e3 + diff[1] * 1e-6
-      var val = ms.toFixed(digits)
+    if (suffix) {
+      val += 'ms'
+    }
 
-      if (suffix) {
-        val += 'ms'
-      }
-
-      this.setHeader(header, val)
-    })
-
-    next()
+    res.setHeader(header, val)
   }
 }

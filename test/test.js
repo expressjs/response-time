@@ -1,6 +1,8 @@
 
 process.env.NO_DEPRECATION = 'response-time'
 
+var after = require('after');
+var assert = require('assert');
 var http = require('http');
 var request = require('supertest');
 var responseTime = require('..')
@@ -44,6 +46,38 @@ describe('responseTime()', function () {
       .get('/')
       .expect('X-Response-Time', /^[0-9]+ms$/, done)
     })
+  })
+})
+
+describe('responseTime(fn)', function () {
+  it('should call fn with response time', function (done) {
+    var cb = after(2, done)
+    var start = process.hrtime()
+    var server = createServer(function (req, res, time) {
+      var diff = process.hrtime(start)
+      var max = diff[0] * 1e3 + diff[1] * 1e-6
+      assert.equal(req.url, '/')
+      assert.equal(res.statusCode, 200)
+      assert.ok(time >= 0)
+      assert.ok(time <= max)
+      cb()
+    })
+
+    request(server)
+    .get('/')
+    .expect(200, cb)
+  })
+
+  it('should not send X-Response-Time header', function (done) {
+    var cb = after(2, done)
+    var server = createServer(function () {
+      cb()
+    })
+
+    request(server)
+    .get('/')
+    .expect(shouldNotHaveHeader('X-Response-Time'))
+    .expect(200, cb)
   })
 })
 
@@ -115,4 +149,10 @@ function createServer(opts, fn) {
       }, 10)
     })
   })
+}
+
+function shouldNotHaveHeader(header) {
+  return function (res) {
+    assert.ok(!(header.toLowerCase() in res.headers), 'should not have header ' + header)
+  }
 }
