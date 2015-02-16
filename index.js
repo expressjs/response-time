@@ -25,7 +25,7 @@ var onHeaders = require('on-headers')
  * @api public
  */
 
-module.exports = function responseTime(options) {
+module.exports = function responseTime(options, callback) {
   if (typeof options === 'number') {
     // back-compat single number argument
     deprecate('number argument: use {digits: ' + JSON.stringify(options) + '} instead')
@@ -62,7 +62,9 @@ module.exports = function responseTime(options) {
       if (suffix) {
         val += 'ms'
       }
-
+      if(callback){
+        callback(val);
+      }
       this.setHeader(header, val)
     })
 

@@ -104,8 +104,33 @@ describe('responseTime(options)', function () {
   })
 })
 
-function createServer(opts, fn) {
-  var _responseTime = responseTime(opts)
+describe('responseTime(options,callback)', function(done){
+  it('should accept a callback function', function (done){
+    var server = createServer({}, undefined , function(item){
+      console.log(item);
+    })
+    request(server)
+    .get('/')
+    .expect('X-Response-Time', /^[0-9\.]+ms$/, done)
+  })
+  it('should execute the callback for each request', function(done){
+    var test = undefined; 
+    var server = createServer({}, undefined, function(responseTime){
+      test = responseTime
+    })
+    request(server)
+    .get('/')
+    .expect(function(res){
+      if(!/^[0-9\.]+ms$/.test(test)){
+        throw new Error('callback did assign variable test correctly')
+      }
+    })
+    .end(done)
+  })
+})
+
+function createServer(opts, fn, callback) {
+  var _responseTime = responseTime(opts, callback)
   return http.createServer(function (req, res) {
     _responseTime(req, res, function (err) {
       setTimeout(function () {
