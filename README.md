@@ -6,7 +6,12 @@
 [![Test Coverage][coveralls-image]][coveralls-url]
 [![Gratipay][gratipay-image]][gratipay-url]
 
-Response time header for node.js
+Response time for Node.js servers.
+
+This module creates a middleware that records the response time for
+requests in HTTP servers. The "response time" is defined here as the
+elapsed time from when a request enters this middleware to when the
+headers are written out to the client.
 
 ## Installation
 
