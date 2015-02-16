@@ -1,5 +1,5 @@
-unreleased
-==========
+2.3.0 / 2015-02-15
+==================
 
   * Add function argument to support recording of response time
 
