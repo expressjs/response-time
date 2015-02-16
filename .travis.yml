@@ -7,5 +7,6 @@ matrix:
   allow_failures:
     - node_js: "0.11"
   fast_finish: true
+sudo: false
 script: "npm run-script test-travis"
 after_script: "test $TRAVIS_NODE_VERSION = '0.10' && npm install coveralls@2.11.1 && cat ./coverage/lcov.info | coveralls"
