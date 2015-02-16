@@ -85,13 +85,13 @@ http.createServer(function (req, res) {
 
 [MIT](LICENSE)
 
-[npm-image]: https://img.shields.io/npm/v/response-time.svg?style=flat
+[npm-image]: https://img.shields.io/npm/v/response-time.svg
 [npm-url]: https://npmjs.org/package/response-time
-[travis-image]: https://img.shields.io/travis/expressjs/response-time.svg?style=flat
+[travis-image]: https://img.shields.io/travis/expressjs/response-time/master.svg
 [travis-url]: https://travis-ci.org/expressjs/response-time
-[coveralls-image]: https://img.shields.io/coveralls/expressjs/response-time.svg?style=flat
+[coveralls-image]: https://img.shields.io/coveralls/expressjs/response-time/master.svg
 [coveralls-url]: https://coveralls.io/r/expressjs/response-time?branch=master
-[downloads-image]: https://img.shields.io/npm/dm/response-time.svg?style=flat
+[downloads-image]: https://img.shields.io/npm/dm/response-time.svg
 [downloads-url]: https://npmjs.org/package/response-time
-[gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg?style=flat
+[gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
 [gratipay-url]: https://www.gratipay.com/dougwilson/
