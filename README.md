@@ -100,7 +100,7 @@ http.createServer(function (req, res) {
 ```js
 var express = require('express')
 var responseTime = require('response-time')
-var StatsD = requrie('node-statsd')
+var StatsD = require('node-statsd')
 
 var app = express()
 var stats = new StatsD()
