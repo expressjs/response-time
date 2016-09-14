@@ -1,3 +1,10 @@
+unreleased
+==========
+
+  * deps: depd@~1.1.0
+    - Enable strict mode in more places
+    - Support web browser loading
+
 2.3.1 / 2015-05-14
 ==================
 
