@@ -6,6 +6,7 @@ unreleased
     - Support web browser loading
   * deps: on-headers@~1.0.1
     - perf: enable strict mode
+  * perf: enable strict mode
 
 2.3.1 / 2015-05-14
 ==================
