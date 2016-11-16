@@ -1,10 +1,10 @@
 
 process.env.NO_DEPRECATION = 'response-time'
 
-var after = require('after');
-var assert = require('assert');
-var http = require('http');
-var request = require('supertest');
+var after = require('after')
+var assert = require('assert')
+var http = require('http')
+var request = require('supertest')
 var responseTime = require('..')
 
 describe('responseTime()', function () {
@@ -12,11 +12,11 @@ describe('responseTime()', function () {
     var server = createServer()
     request(server)
     .get('/')
-    .expect('X-Response-Time', /^[0-9\.]+ms$/, done)
+    .expect('X-Response-Time', /^[0-9.]+ms$/, done)
   })
 
   it('should not override X-Response-Time header', function (done) {
-    var server = createServer(undefined, function(req, res) {
+    var server = createServer(undefined, function (req, res) {
       res.setHeader('X-Response-Time', 'bogus')
     })
 
@@ -110,14 +110,14 @@ describe('responseTime(options)', function () {
       var server = createServer()
       request(server)
       .get('/')
-      .expect('X-Response-Time', /^[0-9\.]+ms$/, done)
+      .expect('X-Response-Time', /^[0-9.]+ms$/, done)
     })
 
     it('should allow custom header name', function (done) {
       var server = createServer({ header: 'X-Time-Taken' })
       request(server)
       .get('/')
-      .expect('X-Time-Taken', /^[0-9\.]+ms$/, done)
+      .expect('X-Time-Taken', /^[0-9.]+ms$/, done)
     })
   })
 
@@ -126,19 +126,19 @@ describe('responseTime(options)', function () {
       var server = createServer()
       request(server)
       .get('/')
-      .expect('X-Response-Time', /^[0-9\.]+ms$/, done)
+      .expect('X-Response-Time', /^[0-9.]+ms$/, done)
     })
 
     it('should allow disabling suffix', function (done) {
       var server = createServer({ suffix: false })
       request(server)
       .get('/')
-      .expect('X-Response-Time', /^[0-9\.]+$/, done)
+      .expect('X-Response-Time', /^[0-9.]+$/, done)
     })
   })
 })
 
-function createServer(opts, fn) {
+function createServer (opts, fn) {
   var _responseTime = responseTime(opts)
   return http.createServer(function (req, res) {
     _responseTime(req, res, function (err) {
@@ -151,7 +151,7 @@ function createServer(opts, fn) {
   })
 }
 
-function shouldNotHaveHeader(header) {
+function shouldNotHaveHeader (header) {
   return function (res) {
     assert.ok(!(header.toLowerCase() in res.headers), 'should not have header ' + header)
   }
