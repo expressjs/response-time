@@ -1,5 +1,5 @@
-unreleased
-==========
+2.3.2 / 2015-11-15
+==================
 
   * deps: depd@~1.1.0
     - Enable strict mode in more places
