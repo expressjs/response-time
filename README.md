@@ -35,7 +35,7 @@ var responseTime = require('response-time')
 
 Create a middleware that adds a `X-Response-Time` header to responses. If
 you don't want to use this module to automatically set a header, please
-see the section about [`responseTime(fn)`](#responsetimeoptions).
+see the section about [`responseTime(fn)`](#responsetimefn).
 
 #### Options
 
