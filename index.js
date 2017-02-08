@@ -31,6 +31,7 @@ module.exports = responseTime
  * @param {object} [options]
  * @param {number} [options.digits=3]
  * @param {string} [options.header=X-Response-Time]
+ * @param {boolean} [options.suffix=true]
  * @return {function}
  * @api public
  */
