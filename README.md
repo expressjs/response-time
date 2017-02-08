@@ -21,6 +21,8 @@ $ npm install response-time
 
 ## API
 
+<!-- eslint-disable no-unused-vars -->
+
 ```js
 var responseTime = require('response-time')
 ```
@@ -111,7 +113,7 @@ stats.socket.on('error', function (error) {
 
 app.use(responseTime(function (req, res, time) {
   var stat = (req.method + req.url).toLowerCase()
-    .replace(/[:\.]/g, '')
+    .replace(/[:.]/g, '')
     .replace(/\//g, '_')
   stats.timing(stat, time)
 }))
