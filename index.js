@@ -10,30 +10,29 @@
 
 /**
  * Module dependencies
- * @api private
+ * @private
  */
 
 var deprecate = require('depd')('response-time')
 var onHeaders = require('on-headers')
 
 /**
- * Module exports
+ * Module exports.
+ * @public
  */
 
 module.exports = responseTime
 
 /**
- * Reponse time:
+ * Create a middleware to add a `X-Response-Time` header displaying
+ * the response duration in milliseconds.
  *
- * Adds the `X-Response-Time` header displaying the response
- * duration in milliseconds.
- *
- * @param {object} [options]
+ * @param {object|function} [options]
  * @param {number} [options.digits=3]
  * @param {string} [options.header=X-Response-Time]
  * @param {boolean} [options.suffix=true]
  * @return {function}
- * @api public
+ * @public
  */
 
 function responseTime (options) {
@@ -66,7 +65,7 @@ function responseTime (options) {
 
 /**
  * Create function to set respoonse time header.
- * @api private
+ * @private
  */
 
 function createSetHeader (options) {
