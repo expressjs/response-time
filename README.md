@@ -5,6 +5,8 @@
 [![Build Status][travis-image]][travis-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
 [![Gratipay][gratipay-image]][gratipay-url]
+[![Known Vulnerabilities](https://snyk.io/test/github/expressjs/response-time/badge.svg)](https://snyk.io/test/github/expressjs/response-time)
+
 
 Response time for Node.js servers.
 
