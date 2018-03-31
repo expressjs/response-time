@@ -1,8 +1,9 @@
 unreleased
 ==========
 
-  * deps: depd@~1.1.1
+  * deps: depd@~1.1.2
     - Remove unnecessary `Buffer` loading
+    - perf: remove argument reassignment
 
 2.3.2 / 2015-11-15
 ==================
