@@ -52,12 +52,24 @@ function responseTime (options) {
   return function responseTime (req, res, next) {
     var startAt = process.hrtime()
 
+    // support koa (ctx, next) arguments
+    var isKoa = typeof next === 'undefined'
+
+    if (isKoa) {
+      next = res
+      res = req.res
+      req = req.req
+    }
+
     onHeaders(res, function onHeaders () {
       var diff = process.hrtime(startAt)
       var time = diff[0] * 1e3 + diff[1] * 1e-6
 
       fn(req, res, time)
     })
+
+    // koa requires a returned promise
+    if (isKoa) return next()
 
     next()
   }
