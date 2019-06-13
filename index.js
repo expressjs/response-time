@@ -50,7 +50,7 @@ function responseTime (options) {
     : opts
 
   return function responseTime (req, res, next) {
-    var startAt = process.hrtime()
+    var startAt = req[Symbol.for('request-received.startAt')] ? req[Symbol.for('request-received.startAt')] : process.hrtime()
 
     onHeaders(res, function onHeaders () {
       var diff = process.hrtime(startAt)
