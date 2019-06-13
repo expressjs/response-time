@@ -51,6 +51,9 @@ function responseTime (options) {
 
   return function responseTime (req, res, next) {
     var startAt = process.hrtime()
+    // expose high-resolution timer and date the request was received
+    req._startAt = startAt
+    req._startTime = new Date()
 
     onHeaders(res, function onHeaders () {
       var diff = process.hrtime(startAt)
