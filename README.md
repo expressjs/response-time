@@ -81,7 +81,6 @@ app.get('/', function (req, res) {
 ### vanilla http server
 
 ```js
-var finalhandler = require('finalhandler')
 var http = require('http')
 var responseTime = require('response-time')
 
@@ -89,10 +88,7 @@ var responseTime = require('response-time')
 var _responseTime = responseTime()
 
 http.createServer(function (req, res) {
-  var done = finalhandler(req, res)
-  _responseTime(req, res, function (err) {
-    if (err) return done(err)
-
+  _responseTime(req, res, function () {
     // respond to request
     res.setHeader('content-type', 'text/plain')
     res.end('hello, world!')
