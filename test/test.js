@@ -141,11 +141,11 @@ describe('responseTime(options)', function () {
 function createServer (opts, fn) {
   var _responseTime = responseTime(opts)
   return http.createServer(function (req, res) {
-    _responseTime(req, res, function (err) {
+    _responseTime(req, res, function () {
       setTimeout(function () {
         fn && fn(req, res)
-        res.statusCode = err ? (err.status || 500) : 200
-        res.end(err ? err.message : 'OK')
+        res.statusCode = 200
+        res.end('OK')
       }, 10)
     })
   })
