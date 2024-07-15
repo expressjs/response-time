@@ -27,8 +27,8 @@
     "eslint-plugin-node": "6.0.1",
     "eslint-plugin-promise": "3.7.0",
     "eslint-plugin-standard": "3.0.1",
-    "istanbul": "0.4.5",
-    "mocha": "2.5.3",
+    "mocha": "6.1.4",
+    "nyc": "14.1.1",
     "supertest": "1.1.0"
   },
   "files": [
@@ -41,8 +41,8 @@
   },
   "scripts": {
     "lint": "eslint --plugin markdown --ext js,md .",
-    "test": "mocha --reporter spec --bail --check-leaks test/",
-    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot --check-leaks test/",
-    "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/"
+    "test": "mocha --reporter spec",
+    "test-ci": "nyc --reporter=lcovonly --reporter=text npm test",
+    "test-cov": "nyc --reporter=html --reporter=text npm test"
   }
 }
