@@ -59,7 +59,7 @@ function responseTime (options) {
       fn(req, res, time)
     })
 
-    next()
+    return next()
   }
 }
 
