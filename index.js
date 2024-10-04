@@ -64,7 +64,7 @@ function responseTime (options) {
 }
 
 /**
- * Create function to set respoonse time header.
+ * Create function to set response time header.
  * @private
  */
 
