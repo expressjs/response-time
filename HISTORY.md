@@ -1,3 +1,11 @@
+Pending
+=======
+
+  * change:
+    - requires Node.js 18 or newer
+  * breaking:
+    - drop support for Node.js 16 and older
+
 2.3.3 / 2024-10-07
 ==========
 
