@@ -15,7 +15,6 @@
   ],
   "repository": "expressjs/response-time",
   "dependencies": {
-    "depd": "~2.0.0",
     "on-headers": "~1.0.1"
   },
   "devDependencies": {

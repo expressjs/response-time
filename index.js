@@ -13,7 +13,6 @@
  * @private
  */
 
-var deprecate = require('depd')('response-time')
 var onHeaders = require('on-headers')
 
 /**
@@ -37,12 +36,6 @@ module.exports = responseTime
 
 function responseTime (options) {
   var opts = options || {}
-
-  if (typeof options === 'number') {
-    // back-compat single number argument
-    deprecate('number argument: use {digits: ' + JSON.stringify(options) + '} instead')
-    opts = { digits: options }
-  }
 
   // get the function to invoke
   var fn = typeof opts !== 'function'
