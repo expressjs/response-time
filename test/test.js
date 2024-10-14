@@ -25,27 +25,11 @@ describe('responseTime()', function () {
       .expect('X-Response-Time', 'bogus', done)
   })
 
-  describe('with "digits"', function () {
-    it('should default to 3', function (done) {
-      var server = createServer()
-      request(server)
-        .get('/')
-        .expect('X-Response-Time', /^[0-9]+\.[0-9]{3}ms$/, done)
-    })
-
-    it('should allow custom digits', function (done) {
-      var server = createServer(5)
-      request(server)
-        .get('/')
-        .expect('X-Response-Time', /^[0-9]+\.[0-9]{5}ms$/, done)
-    })
-
-    it('should allow no digits', function (done) {
-      var server = createServer(0)
-      request(server)
-        .get('/')
-        .expect('X-Response-Time', /^[0-9]+ms$/, done)
-    })
+  it('should default to 3 digits', function (done) {
+    var server = createServer()
+    request(server)
+      .get('/')
+      .expect('X-Response-Time', /^[0-9]+\.[0-9]{3}ms$/, done)
   })
 })
 
@@ -82,29 +66,6 @@ describe('responseTime(fn)', function () {
 })
 
 describe('responseTime(options)', function () {
-  describe('with "digits" option', function () {
-    it('should default to 3', function (done) {
-      var server = createServer()
-      request(server)
-        .get('/')
-        .expect('X-Response-Time', /^[0-9]+\.[0-9]{3}ms$/, done)
-    })
-
-    it('should allow custom digits', function (done) {
-      var server = createServer({ digits: 5 })
-      request(server)
-        .get('/')
-        .expect('X-Response-Time', /^[0-9]+\.[0-9]{5}ms$/, done)
-    })
-
-    it('should allow no digits', function (done) {
-      var server = createServer({ digits: 0 })
-      request(server)
-        .get('/')
-        .expect('X-Response-Time', /^[0-9]+ms$/, done)
-    })
-  })
-
   describe('with "header" option', function () {
     it('should default to X-Response-Time', function (done) {
       var server = createServer()
