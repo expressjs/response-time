@@ -8,6 +8,9 @@ var request = require('supertest')
 var responseTime = require('..')
 
 describe('responseTime()', function () {
+  // Set the timeout to 5 seconds or the ci tests will randomly fail on windows due to timeouts
+  this.timeout(5000)
+
   it('should send X-Response-Time header', function (done) {
     var server = createServer()
     request(server)
