@@ -3,8 +3,12 @@ Pending
 
   * change:
     - requires Node.js 18 or newer
+    - remove deprecated number argument for options
   * breaking:
     - drop support for Node.js 16 and older
+    - response-time no longer supports passing a single number as the `options` argument. Use the `{ digits: <number> }` format instead.
+  * deps: 
+    - remove depd@2.0.0
 
 2.3.3 / 2024-10-07
 ==========
