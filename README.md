@@ -25,10 +25,10 @@ $ npm install response-time
 
 ## API
 
-<!-- eslint-disable no-unused-vars -->
+<!-- eslint-disable no-unused-vars, n/no-missing-require -->
 
 ```js
-var responseTime = require('response-time')
+const responseTime = require('response-time')
 ```
 
 ### responseTime([options])
@@ -66,11 +66,13 @@ invoked as `fn(req, res, time)`, where `time` is a number in milliseconds.
 
 ### express/connect
 
-```js
-var express = require('express')
-var responseTime = require('response-time')
+<!-- eslint-disable n/no-missing-require -->
 
-var app = express()
+```js
+const express = require('express')
+const responseTime = require('response-time')
+
+const app = express()
 
 app.use(responseTime())
 
@@ -81,16 +83,18 @@ app.get('/', function (req, res) {
 
 ### vanilla http server
 
+<!-- eslint-disable n/no-missing-require -->
+
 ```js
-var finalhandler = require('finalhandler')
-var http = require('http')
-var responseTime = require('response-time')
+const finalhandler = require('finalhandler')
+const http = require('http')
+const responseTime = require('response-time')
 
 // create "middleware"
-var _responseTime = responseTime()
+const _responseTime = responseTime()
 
 http.createServer(function (req, res) {
-  var done = finalhandler(req, res)
+  const done = finalhandler(req, res)
   _responseTime(req, res, function (err) {
     if (err) return done(err)
 
@@ -103,20 +107,22 @@ http.createServer(function (req, res) {
 
 ### response time metrics
 
-```js
-var express = require('express')
-var responseTime = require('response-time')
-var StatsD = require('node-statsd')
+<!-- eslint-disable n/no-missing-require -->
 
-var app = express()
-var stats = new StatsD()
+```js
+const express = require('express')
+const responseTime = require('response-time')
+const StatsD = require('node-statsd')
+
+const app = express()
+const stats = new StatsD()
 
 stats.socket.on('error', function (error) {
   console.error(error.stack)
 })
 
 app.use(responseTime(function (req, res, time) {
-  var stat = (req.method + req.url).toLowerCase()
+  const stat = (req.method + req.url).toLowerCase()
     .replace(/[:.]/g, '')
     .replace(/\//g, '_')
   stats.timing(stat, time)
