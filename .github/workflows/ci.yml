@@ -82,9 +82,9 @@ jobs:
           mv "./${{ matrix.node-version }}" "./coverage/${{ matrix.node-version }}"
 
       - name: Upload code coverage
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: coverage
+          name: coverage-${{ matrix.node-version }}-${{matrix.os}}
           path: ./coverage
           retention-days: 1
 
