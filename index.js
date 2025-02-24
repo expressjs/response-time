@@ -13,7 +13,7 @@
  * @private
  */
 
-var onHeaders = require('on-headers')
+const onHeaders = require('on-headers')
 
 /**
  * Module exports.
@@ -35,19 +35,19 @@ module.exports = responseTime
  */
 
 function responseTime (options) {
-  var opts = options || {}
+  const opts = options || {}
 
   // get the function to invoke
-  var fn = typeof opts !== 'function'
+  const fn = typeof opts !== 'function'
     ? createSetHeader(opts)
     : opts
 
   return function responseTime (req, res, next) {
-    var startAt = process.hrtime()
+    const startAt = process.hrtime()
 
     onHeaders(res, function onHeaders () {
-      var diff = process.hrtime(startAt)
-      var time = diff[0] * 1e3 + diff[1] * 1e-6
+      const diff = process.hrtime(startAt)
+      const time = diff[0] * 1e3 + diff[1] * 1e-6
 
       fn(req, res, time)
     })

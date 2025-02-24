@@ -13,22 +13,24 @@
     "response time",
     "x-response-time"
   ],
+  "type": "commonjs",
   "repository": "expressjs/response-time",
   "dependencies": {
-    "on-headers": "~1.0.1"
+    "on-headers": "~1.0.2"
   },
   "devDependencies": {
+    "@eslint/js": "^9.21.0",
     "after": "0.8.2",
-    "eslint": "4.19.1",
-    "eslint-config-standard": "11.0.0",
-    "eslint-plugin-import": "2.10.0",
-    "eslint-plugin-markdown": "1.0.0-beta.6",
-    "eslint-plugin-node": "6.0.1",
-    "eslint-plugin-promise": "3.7.0",
-    "eslint-plugin-standard": "3.0.1",
-    "mocha": "6.1.4",
-    "nyc": "14.1.1",
-    "supertest": "1.1.0"
+    "eslint": "^9.21.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-markdown": "^5.1.0",
+    "eslint-plugin-mocha": "^10.5.0",
+    "eslint-plugin-n": "^17.15.1",
+    "eslint-plugin-promise": "^7.2.1",
+    "mocha": "^11.1.0",
+    "neostandard": "^0.12.1",
+    "nyc": "^17.1.0",
+    "supertest": "^7.0.0"
   },
   "files": [
     "LICENSE",
@@ -39,7 +41,7 @@
     "node": ">= 18"
   },
   "scripts": {
-    "lint": "eslint --plugin markdown --ext js,md .",
+    "lint": "eslint --flag unstable_config_lookup_from_file .",
     "test": "mocha --reporter spec",
     "test-ci": "nyc --reporter=lcovonly --reporter=text npm test",
     "test-cov": "nyc --reporter=html --reporter=text npm test"
