@@ -61,30 +61,12 @@ function responseTime (options) {
  * @private
  */
 
-function createSetHeader (options) {
-  // response time digits
-  var digits = options.digits !== undefined
-    ? options.digits
-    : 3
-
-  // header name
-  var header = options.header || 'X-Response-Time'
-
-  // display suffix
-  var suffix = options.suffix !== undefined
-    ? Boolean(options.suffix)
-    : true
-
+function createSetHeader ({ digits = 3, header = 'X-Response-Time', suffix = true } = {}) {
   return function setResponseHeader (req, res, time) {
-    if (res.getHeader(header)) {
-      return
-    }
+    if (res.getHeader(header)) return
 
-    var val = time.toFixed(digits)
-
-    if (suffix) {
-      val += 'ms'
-    }
+    let val = time.toFixed(digits)
+    if (suffix) val += 'ms'
 
     res.setHeader(header, val)
   }
