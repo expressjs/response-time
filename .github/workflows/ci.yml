@@ -82,9 +82,9 @@ jobs:
           mv "./${{ matrix.node-version }}" "./coverage/${{ matrix.node-version }}"
 
       - name: Upload code coverage
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: coverage
+          name: coverage-${{ matrix.node-version }}-${{matrix.os}}
           path: ./coverage
           retention-days: 1
 
@@ -99,9 +99,9 @@ jobs:
       run: sudo apt-get -y install lcov
 
     - name: Collect coverage reports
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
-        name: coverage
+        name: coverage-18-ubuntu-latest
         path: ./coverage
 
     - name: Merge coverage reports
