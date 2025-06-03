@@ -1,25 +1,24 @@
-
 process.env.NO_DEPRECATION = 'response-time'
 
-var after = require('after')
-var assert = require('assert')
-var http = require('http')
-var request = require('supertest')
-var responseTime = require('..')
+const after = require('after')
+const assert = require('assert')
+const http = require('http')
+const request = require('supertest')
+const responseTime = require('..')
 
 describe('responseTime()', function () {
   // Set the timeout to 5 seconds or the ci tests will randomly fail on windows due to timeouts
   this.timeout(5000)
 
   it('should send X-Response-Time header', function (done) {
-    var server = createServer()
+    const server = createServer()
     request(server)
       .get('/')
       .expect('X-Response-Time', /^[0-9.]+ms$/, done)
   })
 
   it('should not override X-Response-Time header', function (done) {
-    var server = createServer(undefined, function (req, res) {
+    const server = createServer(undefined, function (req, res) {
       res.setHeader('X-Response-Time', 'bogus')
     })
 
@@ -29,7 +28,7 @@ describe('responseTime()', function () {
   })
 
   it('should default to 3 digits', function (done) {
-    var server = createServer()
+    const server = createServer()
     request(server)
       .get('/')
       .expect('X-Response-Time', /^[0-9]+\.[0-9]{3}ms$/, done)
@@ -38,11 +37,11 @@ describe('responseTime()', function () {
 
 describe('responseTime(fn)', function () {
   it('should call fn with response time', function (done) {
-    var cb = after(2, done)
-    var start = process.hrtime()
-    var server = createServer(function (req, res, time) {
-      var diff = process.hrtime(start)
-      var max = diff[0] * 1e3 + diff[1] * 1e-6
+    const cb = after(2, done)
+    const start = process.hrtime()
+    const server = createServer(function (req, res, time) {
+      const diff = process.hrtime(start)
+      const max = diff[0] * 1e3 + diff[1] * 1e-6
       assert.equal(req.url, '/')
       assert.equal(res.statusCode, 200)
       assert.ok(time >= 0)
@@ -56,8 +55,8 @@ describe('responseTime(fn)', function () {
   })
 
   it('should not send X-Response-Time header', function (done) {
-    var cb = after(2, done)
-    var server = createServer(function () {
+    const cb = after(2, done)
+    const server = createServer(function () {
       cb()
     })
 
@@ -71,14 +70,14 @@ describe('responseTime(fn)', function () {
 describe('responseTime(options)', function () {
   describe('with "header" option', function () {
     it('should default to X-Response-Time', function (done) {
-      var server = createServer()
+      const server = createServer()
       request(server)
         .get('/')
         .expect('X-Response-Time', /^[0-9.]+ms$/, done)
     })
 
     it('should allow custom header name', function (done) {
-      var server = createServer({ header: 'X-Time-Taken' })
+      const server = createServer({ header: 'X-Time-Taken' })
       request(server)
         .get('/')
         .expect('X-Time-Taken', /^[0-9.]+ms$/, done)
@@ -87,14 +86,14 @@ describe('responseTime(options)', function () {
 
   describe('with "suffix" option', function () {
     it('should default to true', function (done) {
-      var server = createServer()
+      const server = createServer()
       request(server)
         .get('/')
         .expect('X-Response-Time', /^[0-9.]+ms$/, done)
     })
 
     it('should allow disabling suffix', function (done) {
-      var server = createServer({ suffix: false })
+      const server = createServer({ suffix: false })
       request(server)
         .get('/')
         .expect('X-Response-Time', /^[0-9.]+$/, done)
@@ -103,7 +102,7 @@ describe('responseTime(options)', function () {
 })
 
 function createServer (opts, fn) {
-  var _responseTime = responseTime(opts)
+  const _responseTime = responseTime(opts)
   return http.createServer(function (req, res) {
     _responseTime(req, res, function (err) {
       setTimeout(function () {
