@@ -1,4 +1,4 @@
-unreleased
+2.3.4 / 2025-07-17
 ==========
 
   * deps: on-headers@~1.1.0
