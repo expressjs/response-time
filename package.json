@@ -14,6 +14,10 @@
     "x-response-time"
   ],
   "repository": "expressjs/response-time",
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/express"
+  },
   "dependencies": {
     "depd": "~2.0.0",
     "on-headers": "~1.1.0"
